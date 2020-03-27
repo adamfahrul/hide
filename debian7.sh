@@ -123,7 +123,6 @@ cd
 
 # setting port ssh
 sed -i '/Port 22/a Port  143' /etc/ssh/sshd_config
-sed -i '/Port 22/a Port  80' /etc/ssh/sshd_config
 sed -i 's/Port 22/Port  22/g' /etc/ssh/sshd_config
 sed -i 's/#Banner/Banner/g' /etc/ssh/sshd_config
 service ssh restart
@@ -180,15 +179,6 @@ mv /etc/squid3/squid.conf squid.txt
 curl http://satria.asia/script/squid.conf > /etc/squid3/squid.conf
 sed -i "s|my-server-3|$IPSAYA|" /etc/squid3/squid.conf
 
-# install webmin
-cd
-wget http://prdownloads.sourceforge.net/webadmin/webmin_1.710_all.deb
-dpkg -i --force-all webmin_1.710_all.deb;
-apt-get -y -f install;
-rm /root/webmin_1.710_all.deb
-service webmin restart
-service vnstat restart
-
 # speedtest pak
 wget -O speedtest-cli https://raw.github.com/sivel/speedtest-cli/master/speedtest_cli.py
 chmod +x speedtest-cli
@@ -241,7 +231,6 @@ service ssh restart
 service dropbear restart
 service fail2ban restart
 service squid3 restart
-service webmin restart
 rm -rf ~/.bash_history && history -c
 echo "unset HISTFILE" >> /etc/profile
 
